@@ -1,0 +1,17 @@
+server:
+  port: 8099
+
+spring:
+  kafka:
+    bootstrap-servers:
+    - kafka-node:9092
+    client-id: ${spring.cloud.discovery.instanceId:123}
+    producer:
+      acks: 1
+      key-serializer:
+        org.apache.kafka.common.serialization.StringSerializer
+      value-serializer:
+        org.apache.kafka.common.serialization.StringSerializer
+      retries: 0
+      #这个值只能大不能小了，否则会影响sleuth。
+      buffer-memory: 1048576
