@@ -7,6 +7,9 @@ spring:
     - kafka-node:9092
     client-id: ${spring.cloud.discovery.instanceId:123}
     producer:
+      properties:
+        max.requst.size: 2097152
+      batch-size: 1000
       acks: 1
       key-serializer:
         org.apache.kafka.common.serialization.StringSerializer
