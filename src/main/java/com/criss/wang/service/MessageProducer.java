@@ -17,17 +17,22 @@ public class MessageProducer {
 	private KafkaTemplate<String, String> kafkaTemplate;
 
 	/**
-     * 定时任务
-     */
-    @SuppressWarnings({ "unchecked", "rawtypes" })
+	 * 定时任务
+	 */
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Scheduled(cron = "*/1 * * * * ?")
-    public void send(){
-        String message = UUID.randomUUID().toString();
-        System.out.println(message);
-        ListenableFuture future = kafkaTemplate.send("criss-test", "criss", "1, a");
-        future.addCallback(o -> System.out.println("send-消息发送成功：" + message), throwable -> System.out.println("消息发送失败：" + message));
+	public void send() {
+		String message = UUID.randomUUID().toString();
+		System.out.println(message);
+//		ListenableFuture future = kafkaTemplate.send("luffy-uav-flydata-sync", "criss", message);
+//		future.addCallback(o -> System.out.println("send-消息发送成功：" + message),
+//				throwable -> System.out.println("消息发送失败：" + message));
 
-        ListenableFuture future1 = kafkaTemplate.send("criss-another-test", "criss1", "a, bbbbb");
-        future1.addCallback(o -> System.out.println("send-消息发送成功：" + message), throwable -> System.out.println("消息发送失败：" + message));
-    }
+//		kafkaTemplate.send("luffy-uav-flydata-sync", "wang", message);
+
+		 ListenableFuture future1 = kafkaTemplate.send("criss-another-test", "criss1",
+		 "a, bbbbb");
+		 future1.addCallback(o -> System.out.println("send-消息发送成功：" + message),
+		 throwable -> System.out.println("消息发送失败：" + message));
+	}
 }
